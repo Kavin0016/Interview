@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Js Interview Questions</title>
+    <style>
+      #products > li {
+        cursor: pointer;
+        padding: 5px 0px;
+      }
+      section {
+        padding: 5px 0px;
+        margin-bottom: 10px;
+        border-bottom: 2px dashed black;
+      }
+      section h1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>EVENT DELEGATION</h1>
+      <h4>Products \/</h4>
+      <div id="products">
+        <li id="shoe">shoe</li>
+        <li id="bag">bag</li>
+        <li id="purse">purse</li>
+        <li id="socks">socks</li>
+      </div>
+    </section>
+    <section>
+      <h1>
+        FLATTEN ARRAY <a href="" onclick="flattenArray()">print to console</a>
+      </h1>
+      <pre>
+arr=[
+    2,
+    [4,5],
+    [6,7,[8,9]],
+    [6]
+]
+       </pre
+      >
+    </section>
+    <section>
+      <h1>
+        <span>Check Console for <code>THIS</code> ques</span>
+        <a href="" onclick="queOnThis.call(window)">print to console</a>
+      </h1>
+    </section>
+    <section>
+      <h1><span>Check console for Call QUE1</span></h1>
+    </section>
+    <section>
+      <h1><span>Check console for Call QUE2</span></h1>
+    </section>
+    <script src="./index.js"></script>
+  </body>
+</html>
