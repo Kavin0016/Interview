@@ -283,7 +283,7 @@ CACHING_OR_MEMOIZING = () => {
   }
 
   const clumsyProduct = (num1, num2) => {
-    for (let i = 0; i < 10000000; i++) {}
+    for (let i = 0; i < 10000000; i++) { }
     return num1 * num2;
   };
 
@@ -1218,9 +1218,9 @@ FIND_DISTANCE_IN_STRING = () => {
     } else {
       console.log(
         char +
-          " is " +
-          (this.length - index) +
-          " characters from the end of the string!"
+        " is " +
+        (this.length - index) +
+        " characters from the end of the string!"
       );
     }
   };
@@ -1652,19 +1652,53 @@ PLAINDROME = (str = "") => {
 // console.log("MADAM => ", PLAINDROME("MADAM"));
 // console.log("KAVIN => ", PLAINDROME("KAVIN"));
 
-var status = "global Context";
+PRODUCT_OF_ARRAY_EXCEPT_SELF = () => {
+  const arr = [1, 2, 3, 4, 5, 6];
+  const length = arr.length;
+  /* Approach 1 - with division(/) */
+  let prd_of_arr = arr.reduce((acc, val) => acc * val, 1);
+  let res_arr_appr_1 = [];
+  for (let i = 0; i < length; i++) {
+    res_arr_appr_1[i] = prd_of_arr / arr[i];
+  }
+  console.log("Approach 1 => ", { res_arr_appr_1 });
 
-setTimeout(() => {
-  const status = "setTimeout Callback";
-  const data = {
-    status: "inside object",
-    getStatus() {
-      console.log(this.status);
-    },
-  };
+  /* Approach 2 - without division(/) */
+  /* Here we are going to have a left-product(excluding current index) and right-products(excluding current index) 
+  on seperate arrs, then we will multiply both arr at respective index to form a resultant arr */
+  let left_prd = [];
+  left_prd[0] = 1;
+  let right_prd = [];
+  right_prd[length - 1] = 1;
+  let res_arr_appr_2 = [];
+  for (let i = 1; i < length; i++) {
+    left_prd[i] = arr[i - 1] * left_prd[i - 1];
+  }
+  for (let i = length - 2; i > -1; i--) {
+    right_prd[i] = arr[i + 1] * right_prd[i + 1];
+  }
+  for (let i = 0; i < length; i++) {
+    res_arr_appr_2[i] = left_prd[i] * right_prd[i];
+  }
+  console.log("Approach 2 => ", { res_arr_appr_2 });
+}
 
-  data.getStatus();
-  data.getStatus.call(this);
-}, 0);
+PRODUCT_OF_ARRAY_EXCEPT_SELF();
 
-// CALL_QUE1();
+SUM_OF_ARRAY_EXCEPT_SELF = () => {
+  /* As of the above mechanism, but at 
+  appr_1: for * => +, for / => -;
+  appr_2: for * => + */
+}
+
+MINUS_OF_ARRAY_EXCEPT_SELF = () => {
+  /* As of the above mechanism, but at 
+  appr_1: for * => -, for / => +;
+  appr_2: for * => - */
+}
+
+DIVISION_OF_ARRAY_EXCEPT_SELF = () => {
+  /* As of the above mechanism, but at 
+  appr_1: for * => /, for / => *;
+  appr_2: for * => / */
+}
