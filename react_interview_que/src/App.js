@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import { useState } from "react";
 import FolderTreeStructure from "./_component/folderTreeStructure/folderTreeStructure";
 import DebounceFn from "./_component/debounceFn/deBounce";
+import ThrottleFn from "./_component/throttleFn/throttle";
 import { explorer } from "./_component/folderTreeStructure/folderData";
 import DifferentCounters from "./_component/renderDifferentCounters/Counters";
 import TabClickAndMsgPresist from "./_component/tabClickAndMsg/tabClickAndMsg";
@@ -21,6 +22,9 @@ function App() {
       name: "De-Bounce",
     },
     {
+      name: "Throttle-Fn"
+    },
+    {
       name: "Render Different Counters",
     },
     {
@@ -34,9 +38,10 @@ function App() {
     0: <FolderTreeStructure explorer={explorer} />,
     1: <div>Hi I am React Fragment</div>,
     2: <DebounceFn />,
-    3: <DifferentCounters />,
-    4: <TabClickAndMsgPresist />,
-    5: <TodoApp />,
+    3: <ThrottleFn />,
+    4: <DifferentCounters />,
+    5: <TabClickAndMsgPresist />,
+    6: <TodoApp />,
   };
   return (
     <div className="App">
