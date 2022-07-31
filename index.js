@@ -26,6 +26,20 @@
   QUE: What is first class functions? :: Ans: functions which are treated as variables are known as first class functions.
   QUE: What is the application of JSON.stringify and JSON.parse :: Ans: It will be used for localstorage:.getItem&.setItem methods
   QUE: rest vs spread :: Ans: rest operator should be used at the end of parameter's list, but spread operator can be used at the middle while passing or assigning 
+  QUE: what is Abort Controller? :: Ans: read it!!!!
+  QUE: what is Intersection Observer? :: Ans: read it!!!!
+  QUE: System Design Interview Question as follows :
+    1)Google like typeahead / auto-suggestion,
+    2)Google like Day Calendar,
+    3)Microsoft Excel like SpreadSheet,
+    4)Rendering Dynamic form using Config,
+    5)Implement Progress bar,
+    6)Implement Start Rating Widget,
+    7)Twitter post like textarea,
+    8)Create a ToDo Application,
+    9)Design Cart Page,
+    10)Design Product Listing page with filter,
+    11)Bui;d tic-tac-toe game
   QUE: (Functiion Declaration || Function Defenition || Function Statement) vs Function Expression
       Ans: 
         1) when we declare a normal function that is called => (Functiion Declaration || Function Defenition || Function Statement)
