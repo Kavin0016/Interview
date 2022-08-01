@@ -7,6 +7,7 @@ import { explorer } from "./_component/folderTreeStructure/folderData";
 import DifferentCounters from "./_component/renderDifferentCounters/Counters";
 import TabClickAndMsgPresist from "./_component/tabClickAndMsg/tabClickAndMsg";
 import TodoApp from "./_component/toDoApp/ToDoApp";
+import TypeAHead from "./_component/System Design/type_a_head";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
     {
       name: "To-Do App",
     },
+    {
+      name: "System Design::Type-a-head"
+    }
   ];
   const renderer = {
     0: <FolderTreeStructure explorer={explorer} />,
@@ -42,6 +46,7 @@ function App() {
     4: <DifferentCounters />,
     5: <TabClickAndMsgPresist />,
     6: <TodoApp />,
+    7: <TypeAHead />
   };
   return (
     <div className="App">

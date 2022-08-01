@@ -1,0 +1,27 @@
+.t-a-h-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  padding: 5px 50px;
+}
+
+.t-a-h-wrapper input {
+  border: 1px solid;
+  outline: none;
+  border-radius: 3px;
+}
+
+.t-a-h-wrapper input:focus {
+  border: 2px solid;
+}
+
+.t-a-h-wrapper ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.t-a-h-wrapper li {
+  margin: 5px 0px;
+  cursor: pointer;
+}

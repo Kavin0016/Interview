@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
+export const useDebounce = (cb, d) => {
+  let timer;
+  return function (...args) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      cb(...args);
+    }, d);
+  };
+};
+
 const DebounceFn = () => {
   let [res, setRes] = useState([]);
-  const useDebounce = (cb, d) => {
-    let timer;
-    return function (...args) {
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        cb(...args);
-      }, d);
-    };
-  };
 
   const handleChange = useDebounce((e) => {
     setRes([...res, e.target.value]);
