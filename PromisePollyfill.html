@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <h5>Sync</h5>
+    <label><b>First:</b><label>
+            <div id="a.first"></div>
+            <label><b>Second:</b><label>
+                    <div id="a.second"></div>
+                    <label><b>Third:</b><label>
+                            <div id="a.third"></div>
+
+                            <h5>Sync: Branched</h5>
+                            <label><b>First:</b><label>
+                                    <div id="b.first"></div>
+                                    <label><b>Second:</b><label>
+                                            <div id="b.second"></div>
+                                            <label><b>Third:</b><label>
+                                                    <div id="b.third"></div>
+
+                                                    <h5>ASync</h5>
+                                                    <label><b>First:</b><label>
+                                                            <div id="c.first"></div>
+                                                            <label><b>Second:</b><label>
+                                                                    <div id="c.second"></div>
+                                                                    <label><b>Third:</b><label>
+                                                                            <div id="c.third"></div>
+
+                                                                            <h5>ASync: Branched</h5>
+                                                                            <label><b>First:</b><label>
+                                                                                    <div id="d.first"></div>
+                                                                                    <label><b>Second:</b><label>
+                                                                                            <div id="d.second"></div>
+                                                                                            <label><b>Third:</b><label>
+                                                                                                    <div id="d.third">
+                                                                                                    </div>
+
+                                                                                                    <label
+                                                                                                        style="margin-top:20px">LOGS:</label>
+                                                                                                    <div id="log"></div>
+
+                                                                                                    <script
+                                                                                                        type="text/javascript">
+      console.log = function(str){
+        set("log", get("id")+"</br>"+str);
+      }
+   
+       function get(id) {
+          return document.getElementById(id).innerHTML;
+        }
+
+       
+        function set(id, value) {
+          document.getElementById(id).innerHTML = value || "";
+          return value;
+        }
+
+    class CustomPromise {
+      resolvedValue = null;
+      isResolved = false;
+      isCalled = false;
+      executor = null;
+      constructor(cb){       
+        this.resolve = this.resolve.bind(this);
+        this.then = this.then.bind(this);
+        cb(this.resolve); 
+      }
+      resolve(data){
+        this.resolvedValue = data;        
+        this.isResolved = true;
+        return this;
+      }
+      then(cb){
+        if(this.isResolved){
+          return new CustomPromise(res => res(cb(this.resolvedValue)));        
+        }
+      }
+    }
+
+     // testcase1: SYNC simple chain
+     new CustomPromise((res) => {       
+        res(100);
+      })
+        .then((data) => data)
+        .then((data) => set("a.first", data))
+        .then(data => data +  100)
+        .then((data) => set("a.second", data))
+        .then(data => data + 100)
+        .then((data) => set("a.third", data));
+
+      //testcase2: SYNC Branched chain
+      const a = new Promise((res) => {
+        res(100)
+      })
+        .then((data) => set("b.first", data))
+
+      a
+        .then(data => data + 100)
+        .then((data) => set("b.second", data))
+
+      a
+      .then(data => data + 100)
+      .then((data) => set("b.third", data))
+
+      // testcase3.ASYNC. simple chain
+      new Promise((res) => {
+        setTimeout(() => res(100), 1500);
+      })
+        .then((data) => set("c.first", data))
+        .then(data => data + 100)
+        .then((data) => set("c.second", data))
+        .then(data => data + 100)
+        .then((data) => set("c.third", data));
+
+
+      //testcase4.ASYNC branched chain
+      const d = new Promise((res) => {
+        setTimeout(() => res(100), 3000)
+      })
+        .then((data) => set("d.first", data))
+      d
+        .then(data => data + 100)
+        .then((data) => set("d.second", data))
+
+      d
+        .then(data => data + 100)
+        .then((data) => set("d.third", data));
+     
+
+                                                                                                        </script>
+</body>
+
+</html>

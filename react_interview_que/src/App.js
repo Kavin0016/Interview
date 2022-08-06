@@ -7,7 +7,9 @@ import { explorer } from "./_component/folderTreeStructure/folderData";
 import DifferentCounters from "./_component/renderDifferentCounters/Counters";
 import TabClickAndMsgPresist from "./_component/tabClickAndMsg/tabClickAndMsg";
 import TodoApp from "./_component/toDoApp/ToDoApp";
-import TypeAHead from "./_component/System Design/type_a_head";
+import TypeAHead from "./_component/typeAHead/type_a_head";
+import TicTacToe from "./_component/ticTacToe";
+import TicTacToeHooks from "./_component/ticTacToe_Hooks/index.js"
 import "./App.css";
 
 function App() {
@@ -36,6 +38,12 @@ function App() {
     },
     {
       name: "System Design::Type-a-head"
+    },
+    {
+      name: "System Design::TicTacToe-1"
+    },
+    {
+      name: "System Design::TicTacToe-2::Optimised"
     }
   ];
   const renderer = {
@@ -46,7 +54,9 @@ function App() {
     4: <DifferentCounters />,
     5: <TabClickAndMsgPresist />,
     6: <TodoApp />,
-    7: <TypeAHead />
+    7: <TypeAHead />,
+    8: <TicTacToe />,
+    9: <TicTacToeHooks />
   };
   return (
     <div className="App">

@@ -1697,7 +1697,7 @@ PRODUCT_OF_ARRAY_EXCEPT_SELF = () => {
   console.log("Approach 2 => ", { res_arr_appr_2 });
 }
 
-PRODUCT_OF_ARRAY_EXCEPT_SELF();
+// PRODUCT_OF_ARRAY_EXCEPT_SELF();
 
 SUM_OF_ARRAY_EXCEPT_SELF = () => {
   /* As of the above mechanism, but at 
@@ -1716,3 +1716,51 @@ DIVISION_OF_ARRAY_EXCEPT_SELF = () => {
   appr_1: for * => /, for / => *;
   appr_2: for * => / */
 }
+
+REVERSE_STRING_EXCEPT_SPECIAL_CHAR = () => {
+  let str = [..."ab-c+d>e<f>>>ghij"];
+  let splCharArr = [];
+  let filterAplha = "";
+  str.map((char, i) => {
+    if (char >= 'a' && char <= 'z') {
+      filterAplha += char;
+    } else {
+      const Obj = {
+        key: char,
+        index: i
+      }
+      splCharArr.push(Obj);
+    }
+  })
+  filterAplha = filterAplha.split("").reverse().join("").replace(/,/g, "");
+  splCharArr.forEach(({ key, index }) => {
+    filterAplha = filterAplha.slice(0, index) + key + filterAplha.slice(index);
+  });
+  console.log("Reversed Str => ", filterAplha);
+}
+
+REVERSE_STRING_EXCEPT_SPECIAL_CHAR();
+
+OBJ_DEEP_COPY = (source) => {
+  var target = {};
+
+  // Getting source object keys
+  const keys = Object.keys(source);
+  keys.forEach(key => {
+    // Checking if current value is an object
+    if (typeof source[key] === "object") {
+      // Calling our function recursively for current value
+      target[key] = OBJ_DEEP_COPY(source[key]);
+    } else {
+      // Directly assigning the value
+      target[key] = source[key];
+    }
+  });
+
+  console.log(target);
+  return target;
+}
+
+// OBJ_DEEP_COPY({ a: 'a' });
+// OBJ_DEEP_COPY({ b: 'b', c: { d: 'd', e: { f: 'f' } } });
+// OBJ_DEEP_COPY({});

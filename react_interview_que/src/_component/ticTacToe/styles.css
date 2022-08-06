@@ -1,0 +1,76 @@
+.tic-tac-toe {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tic-tac-toe .console-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.tic-tac-toe button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.console-wrapper .game-board {
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.console-wrapper .game-board .game-tile {
+  width: 33%;
+  border: 1px solid #dddddd;
+  background-color: coral;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+}
+
+.console-wrapper .game-board .game-tile:hover {
+  background-color: chocolate;
+}
+
+.console-wrapper .score-board {
+  height: 150px;
+  width: 80px;
+}
+
+.console-wrapper .score-board .title {
+  font-size: 24px;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.console-wrapper .score-board .score-wrapper {
+  height: 100%;
+  overflow: auto;
+  background-color: grey;
+  scroll-behavior: smooth;
+}
+
+.console-wrapper .score-board .score-wrapper .score {
+  text-align: left;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin: 4px 0px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.console-wrapper .score-board .score-wrapper .score:hover {
+  background-color: coral;
+}
+
+.console-wrapper .score-board .score-wrapper .score:active {
+  background-color: chocolate;
+}
