@@ -132,54 +132,6 @@ Array.prototype.myReduce = function (callback, initialValue, context) {
   return accumulator;
 };
 
-/* Pollyfill for promise */
-function MyPromise(executor) {
-  let isResolved;
-  let isRejected;
-  let resolvedValue;
-  let rejectedErr;
-  let resolveHandler;
-  let rejectHandler;
-
-  function resolve(val) {
-    isResolved = true;
-    resolvedValue = val;
-    return this;
-  }
-
-  function reject(err) {
-    isRejected = true;
-    rejectedErr = err;
-    return this;
-  }
-
-  this.then = function (handler) {
-    if (isResolved) {
-      handler(resolvedValue);
-      return this;
-    }
-  };
-
-  this.catch = function (handler) {
-    if (isRejected) {
-      handler(rejectedErr);
-      return this;
-    }
-  };
-
-  this.finally = function (handler) {
-    if (isResolved || isRejected) {
-      handler();
-    }
-  };
-
-  executor(resolve, reject);
-}
-
-// new MyPromise((resolve, reject) => setTimeout(resolve(5), 2000)).then((val) =>
-//   console.log(`resolved Value ${val}`)
-// );
-
 /* Pollyfill for promise.all */
 Promise.myAll = function (promises) {
   return new Promise((res, rej) => {
