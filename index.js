@@ -297,7 +297,7 @@ CACHING_OR_MEMOIZING = () => {
   }
 
   const clumsyProduct = (num1, num2) => {
-    for (let i = 0; i < 10000000; i++) { }
+    for (let i = 0; i < 10000000; i++) {}
     return num1 * num2;
   };
 
@@ -1006,9 +1006,9 @@ FIND_DISTANCE_IN_STRING = () => {
     } else {
       console.log(
         char +
-        " is " +
-        (this.length - index) +
-        " characters from the end of the string!"
+          " is " +
+          (this.length - index) +
+          " characters from the end of the string!"
       );
     }
   };
@@ -1469,7 +1469,7 @@ PRODUCT_OF_ARRAY_EXCEPT_SELF = () => {
     res_arr_appr_2[i] = left_prd[i] * right_prd[i];
   }
   console.log("Approach 2 => ", { res_arr_appr_2 });
-}
+};
 
 // PRODUCT_OF_ARRAY_EXCEPT_SELF();
 
@@ -1477,50 +1477,50 @@ SUM_OF_ARRAY_EXCEPT_SELF = () => {
   /* As of the above mechanism, but at 
   appr_1: for * => +, for / => -;
   appr_2: for * => + */
-}
+};
 
 MINUS_OF_ARRAY_EXCEPT_SELF = () => {
   /* As of the above mechanism, but at 
   appr_1: for * => -, for / => +;
   appr_2: for * => - */
-}
+};
 
 DIVISION_OF_ARRAY_EXCEPT_SELF = () => {
   /* As of the above mechanism, but at 
   appr_1: for * => /, for / => *;
   appr_2: for * => / */
-}
+};
 
 REVERSE_STRING_EXCEPT_SPECIAL_CHAR = () => {
   let str = [..."ab-c+d>e<f>>>ghij"];
   let splCharArr = [];
   let filterAplha = "";
   str.map((char, i) => {
-    if (char >= 'a' && char <= 'z') {
+    if (char >= "a" && char <= "z") {
       filterAplha += char;
     } else {
       const Obj = {
         key: char,
-        index: i
-      }
+        index: i,
+      };
       splCharArr.push(Obj);
     }
-  })
+  });
   filterAplha = filterAplha.split("").reverse().join("").replace(/,/g, "");
   splCharArr.forEach(({ key, index }) => {
     filterAplha = filterAplha.slice(0, index) + key + filterAplha.slice(index);
   });
   console.log("Reversed Str => ", filterAplha);
-}
+};
 
-REVERSE_STRING_EXCEPT_SPECIAL_CHAR();
+// REVERSE_STRING_EXCEPT_SPECIAL_CHAR();
 
 OBJ_DEEP_COPY = (source) => {
   var target = {};
 
   // Getting source object keys
   const keys = Object.keys(source);
-  keys.forEach(key => {
+  keys.forEach((key) => {
     // Checking if current value is an object
     if (typeof source[key] === "object") {
       // Calling our function recursively for current value
@@ -1533,8 +1533,37 @@ OBJ_DEEP_COPY = (source) => {
 
   console.log(target);
   return target;
-}
+};
 
 // OBJ_DEEP_COPY({ a: 'a' });
 // OBJ_DEEP_COPY({ b: 'b', c: { d: 'd', e: { f: 'f' } } });
 // OBJ_DEEP_COPY({});
+
+CASE_SPECIFIC_STR_SORT = (str = "") => {
+  /*
+    Given string str consisting of uppercase and lowercase characters. 
+    The task is to sort uppercase and lowercase characters separately such that
+    if the ith place in the original string had an uppercase character, 
+    then it should not have a lowercase character after being sorted and vice versa.
+  */
+  let smallCase = [];
+  let capitalCase = [];
+  let res = "";
+
+  [...str].forEach((alpha, idx) => {
+    let code = str.charCodeAt(idx);
+    if (code >= 65 && code <= 90) capitalCase.push(alpha);
+    if (code >= 97 && code <= 122) smallCase.push(alpha);
+  });
+  smallCase.sort();
+  capitalCase.sort();
+  [...str].forEach((alpha, idx) => {
+    let code = str.charCodeAt(idx);
+    if (code >= 65 && code <= 90) res = res + capitalCase.shift();
+    if (code >= 97 && code <= 122) res = res + smallCase.shift();
+  });
+  console.log(`${str} : ${res}`);  
+};
+
+CASE_SPECIFIC_STR_SORT("gEeksfOrgEEkS"); //eEfggkEkrEOsS
+CASE_SPECIFIC_STR_SORT("eDefSR"); //eDefRS

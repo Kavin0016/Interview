@@ -13,8 +13,7 @@ class MyPromise {
   #onFailBind = this.#onFail.bind(this);
   #runCallbacks = this.#runCallbackMethod.bind(this);
 
-  constructor(cb) {
-    // console.log(`MyPromise.js :: constructor :: ${this.#value} :: ${typeof(this.#value)}`)
+  constructor(cb) {    
     try {
       cb(this.#onSuccessBind, this.#onFailBind);
     } catch (e) {
@@ -25,8 +24,7 @@ class MyPromise {
   #runCallbackMethod() {
     if (this.#state === STATE.FULFILLED) {
       this.#thenCbs.forEach((callback, i) => {
-        callback(this.#value);
-        // console.log(`MyPromise.js :: runCallbackMethod :: ${this.#value}`)
+        callback(this.#value);        
       });
 
       this.#thenCbs = [];
@@ -77,8 +75,7 @@ class MyPromise {
 
   then(thenCb, catchCb) {
     return new MyPromise((resolve, reject) => {
-      this.#thenCbs.push((result) => {
-        console.log(`MyPromise.js :: then :: ${result}`)
+      this.#thenCbs.push((result) => {        
         if (thenCb == null) {
           resolve(result);
           return;
