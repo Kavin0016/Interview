@@ -20,7 +20,7 @@
 
   QUE: == VS === : Which one is faster? :: ANS: === is faster bcoz there's no type conversion in === instead == there is type conversion.
   QUE: DomcontentLoaded vs onLoad : difference ? :: ANS: DomcontentLoaded is fired once dom is loaded, but onLoad will fire after all the resources like img, scripts are loaded.
-  QUE: Element.getBoundingClientRect() ? : what it is ? :: ANS: simply returns `DOMRect` Obj providinf info abt the size of the obj and posirion relative to viewport.
+  QUE: Element.getBoundingClientRect() ? : what it is ? :: ANS: simply returns `DOMRect` Obj providing info abt the size of the obj and position relative to viewport.
   QUE: What happens when you type an URL in the browser and press enter : Medium Article
   QUE: What is AdBlocker ? || How AdBlocker works ? : Medium Article
   QUE: What is first class functions? :: Ans: functions which are treated as variables are known as first class functions.
@@ -39,7 +39,7 @@
     8)Create a ToDo Application,
     9)Design Cart Page,
     10)Design Product Listing page with filter,
-    11)Bui;d tic-tac-toe game
+    11)Build tic-tac-toe game
   QUE: (Functiion Declaration || Function Defenition || Function Statement) vs Function Expression
       Ans: 
         1) when we declare a normal function that is called => (Functiion Declaration || Function Defenition || Function Statement)
@@ -50,7 +50,7 @@
                 };
   QUE: Function Hoisting ?
       Ans: Functions are hoisted completely if we call the function before it is declare or initialized it will work fine,
-      bcoz while creating exection context the fuctions will be copied entierly and saved in the memory,
+      bcoz while creating execution context the fuctions will be copied entierly and saved in the memory,
       but this is not the scenario in case of variables, 
       variables will be hoisted which depends on let or var but the value will be stored in memory,
       only when the compiler reaches the line where the values have been initialized, 
@@ -66,7 +66,7 @@
         import ReactDOM from 'react-dom/client';
         import App from "./App";
         let container = document.getElementById("root");
-        let root = ReactDOM.crateRoot(container);
+        let root = ReactDOM.createRoot(container);
         root.render(<App />);
       2) Automatic Batching: <Internally Handled />
       3) Opt-out Automatic Batching: 
@@ -489,7 +489,7 @@ COMPOSITION_POLLYFILL = () => {
     };
   };
 
-  //It will return a function to provide initial value. If we calls that return function with initial vaue means,
+  //It will return a function to provide initial value. If we calls that return function with initial value means,
   //it will first call multiplyFour by passing initial vaue as paramete then,
   //it calls subtractTwo by passing the returned value from multiplyFour fn. then,
   //it calls addFive by passing the returned value from subtractTwo fn. then,
@@ -1077,7 +1077,7 @@ FUNCTION_SCOPE = () => {
   var x = 21;
 
   var fun = function () {
-    /* Here the var x will be showed from global scope since its showed local scope cope has priority over global,
+    /* Here the var x will be showed from global scope since its showed, local scope has priority over global,
     so it will print "undefined" since the local variable has not yet initialized */
     console.log("inner fun before initialization", x);
     var x = 20;
@@ -1562,7 +1562,7 @@ CASE_SPECIFIC_STR_SORT = (str = "") => {
     if (code >= 65 && code <= 90) res = res + capitalCase.shift();
     if (code >= 97 && code <= 122) res = res + smallCase.shift();
   });
-  console.log(`${str} : ${res}`);  
+  console.log(`${str} : ${res}`);
 };
 
 CASE_SPECIFIC_STR_SORT("gEeksfOrgEEkS"); //eEfggkEkrEOsS
