@@ -1565,5 +1565,69 @@ CASE_SPECIFIC_STR_SORT = (str = "") => {
   console.log(`${str} : ${res}`);
 };
 
-CASE_SPECIFIC_STR_SORT("gEeksfOrgEEkS"); //eEfggkEkrEOsS
-CASE_SPECIFIC_STR_SORT("eDefSR"); //eDefRS
+// CASE_SPECIFIC_STR_SORT("gEeksfOrgEEkS"); //eEfggkEkrEOsS
+// CASE_SPECIFIC_STR_SORT("eDefSR"); //eDefRS
+
+MaxDiffBetTwoEle = (eles = []) => {
+  let min = eles[0],
+    max = eles[0];
+  [...eles].forEach((ele) => {
+    if (ele - min > max) max = ele - min;
+    else if (ele < min) min = ele;
+  });
+  console.log("Maximum Diff. btw. ele.s is: ", max);
+};
+
+// MaxDiffBetTwoEle([20, 18, 45, 78, 3, 65, 55]);
+// MaxDiffBetTwoEle([20, 8, 45, 78, 3, 65, 55]);
+
+InfiniteSum = (...rest) => {
+  let nums = [],
+    sum = 0;
+  rest.forEach((num) => {
+    if (!isNaN(num) && typeof num !== "object") nums.push(parseInt(num));
+  });
+  sum = nums.reduce((acc, ele) => (acc += ele), 0);
+  console.log(sum);
+};
+
+// InfiniteSum(1, 2, 3, "4", null, undefined);
+// InfiniteSum(10, 20, NaN, [1, 2, "4"], "1", { 1: "1" });
+
+RepeatStr = (str = "", num = 0) => {
+  // sol. 1 - Build-in method
+  // if (num < 0) return "";
+  // return str.repeat(num);
+
+  //sol. 2 - Recursion
+  if (num < 0) return "";
+  if (num == 1) return str;
+  return str + RepeatStr(str, num - 1);
+};
+
+// console.log(RepeatStr("abc", 2));
+// console.log(RepeatStr("*", 9));
+// console.log(RepeatStr("xyz", -2));
+
+TruncateStr = (str = "", num = 0) => {
+  if (num >= str?.length) return str;
+  if (num <= 3) return str?.slice(0, num) + "...";
+  return str?.slice(0, num - 3) + "...";
+};
+
+// console.log(TruncateStr("A-tiket a-tisket a green and yellow basket", 11));
+// console.log(TruncateStr("A-tiket a-tisket a green and yellow basket", 2));
+// console.log(TruncateStr("A-tiket a-tisket a green and yellow basket", 4));
+// console.log(TruncateStr("A-tiket a-tisket a green and yellow basket", 1100));
+
+ChunkArr = (arr = [], size = 0) => {
+  let chuks = [];
+  while (arr.length) {
+    chuks.push(arr.splice(0, size));
+  }
+  return chuks;
+};
+
+console.log(ChunkArr([1, 2, 3, 4, 5], 2));
+console.log(ChunkArr([1, 2, 3, 4, 5], 3));
+console.log(ChunkArr([1, 2, 3, 4, 5, 6], 2));

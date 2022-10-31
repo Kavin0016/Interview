@@ -1,0 +1,24 @@
+{
+  "name": "Interview",
+  "version": "1.0.0",
+  "description": "This repo is intended for Interview series for JS and React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon debug.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kavin0016/Interview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kavin0016/Interview/issues"
+  },
+  "homepage": "https://github.com/Kavin0016/Interview#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
