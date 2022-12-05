@@ -297,7 +297,7 @@ CACHING_OR_MEMOIZING = () => {
   }
 
   const clumsyProduct = (num1, num2) => {
-    for (let i = 0; i < 10000000; i++) {}
+    for (let i = 0; i < 10000000; i++) { }
     return num1 * num2;
   };
 
@@ -1006,9 +1006,9 @@ FIND_DISTANCE_IN_STRING = () => {
     } else {
       console.log(
         char +
-          " is " +
-          (this.length - index) +
-          " characters from the end of the string!"
+        " is " +
+        (this.length - index) +
+        " characters from the end of the string!"
       );
     }
   };
@@ -1610,9 +1610,9 @@ RepeatStr = (str = "", num = 0) => {
 // console.log(RepeatStr("xyz", -2));
 
 TruncateStr = (str = "", num = 0) => {
-  if (num >= str?.length) return str;
-  if (num <= 3) return str?.slice(0, num) + "...";
-  return str?.slice(0, num - 3) + "...";
+  if (num >= str.length) return str;
+  if (num <= 3) return str.slice(0, num) + "...";
+  return str.slice(0, num - 3) + "...";
 };
 
 // console.log(TruncateStr("A-tiket a-tisket a green and yellow basket", 11));
@@ -1628,6 +1628,76 @@ ChunkArr = (arr = [], size = 0) => {
   return chuks;
 };
 
-console.log(ChunkArr([1, 2, 3, 4, 5], 2));
-console.log(ChunkArr([1, 2, 3, 4, 5], 3));
-console.log(ChunkArr([1, 2, 3, 4, 5, 6], 2));
+// console.log(ChunkArr([1, 2, 3, 4, 5], 2));
+// console.log(ChunkArr([1, 2, 3, 4, 5], 3));
+// console.log(ChunkArr([1, 2, 3, 4, 5, 6], 2));
+
+SmallestSubArrWithGreaterSum = (arr = [], x) => {
+  /* Given an array of integers and a number x, find the smallest subarray with sum greater than the given value.  */
+  // Initialize current sum and minimum length
+  let n = arr.length;
+  let curr_sum = 0, min_len = n + 1;
+
+  // Initialize starting and ending indexes
+  let start = 0, end = 0;
+  while (end < n) {
+    // Keep adding array elements while current sum
+    // is smaller than or equal to x
+    while (curr_sum <= x && end < n)
+      curr_sum += arr[end++];
+
+    // If current sum becomes greater than x.
+    while (curr_sum > x && start < n) {
+      // Update minimum length if needed
+      if (end - start < min_len)
+        min_len = end - start;
+
+      // remove starting elements
+      curr_sum -= arr[start++];
+    }
+  }
+  console.log({ arr, n, res: min_len })
+  return min_len;
+}
+
+// SmallestSubArrWithGreaterSum([1, 4, 45, 6, 10, 19], 51);
+// SmallestSubArrWithGreaterSum([1, 10, 5, 2, 7], 9);
+// SmallestSubArrWithGreaterSum([1, 11, 100, 1, 0, 200, 3, 2, 1, 250], 280);
+
+SmallestPositiveMissingNumber = (arr = []) => {
+  /* Given an unsorted array arr[] with both positive and negative elements, the task is to find the smallest positive number missing from the array. */
+  let n = arr.length;
+  // To mark the occurrence of elements
+  let present = new Array(n + 1).fill(false);
+
+  // Mark the occurrences
+  for (let i = 0; i < n; i++) {
+    // Only mark the required elements
+    // All non-positive elements and
+    // the elements greater n + 1 will never
+    // be the answer
+    // For example, the array will be {1, 2, 3}
+    // in the worst case and the result
+    // will be 4 which is n + 1
+    if (arr[i] > 0 && arr[i] <= n) {
+      present[arr[i]] = true;
+    }
+  }
+  // Find the first element which didn't
+  // appear in the original array
+
+  for (let i = 1; i <= n; i++) {
+    if (!present[i]) {
+      console.log({arr, res: i});
+      return i;
+    }
+  }
+  // If the original array was of the
+  // type {1, 2, 3} in its sorted form
+  console.log({arr, res: n+1});
+  return n + 1;
+}
+
+SmallestPositiveMissingNumber([0, 10, 2, -10, -20]);
+SmallestPositiveMissingNumber([2, 3, 7, 6, 8, -1, -10, 15]);
+SmallestPositiveMissingNumber([2, 3, -7, 6, 8, 1, -10, 15]);

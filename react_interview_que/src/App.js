@@ -10,6 +10,7 @@ import TodoApp from "./_component/toDoApp/ToDoApp";
 import TypeAHead from "./_component/typeAHead/type_a_head";
 import TicTacToe from "./_component/ticTacToe";
 import TicTacToeHooks from "./_component/ticTacToe_Hooks/index.js"
+import ImageCaurosel from "./_component/imageCaurosel";
 import "./App.css";
 
 function App() {
@@ -44,6 +45,9 @@ function App() {
     },
     {
       name: "System Design::TicTacToe-2::Optimised"
+    },
+    {
+      name: "System Design :: ImageCaurosel"
     }
   ];
   const renderer = {
@@ -56,7 +60,8 @@ function App() {
     6: <TodoApp />,
     7: <TypeAHead />,
     8: <TicTacToe />,
-    9: <TicTacToeHooks />
+    9: <TicTacToeHooks />,
+    10: <ImageCaurosel />
   };
   return (
     <div className="App">
