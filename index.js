@@ -59,8 +59,8 @@
       Ans:
         1) syntax,
         2) Implicit Return keyword
-        3) arguments keyword => can be accessible [vs] cannot be accessible bcoz this points to global object
-        4) this keyword => it points to current function [vs] it points to global object
+        3) arguments keyword => can be accessible [vs] cannot be accessible bcoz this points to lexical scope of current scope
+        4) this keyword => it points to current function [vs] it points to lexical scope of current scope
   QUE: React18 features:
       1) Enabling React18 feture on root:
         import ReactDOM from 'react-dom/client';
@@ -91,7 +91,44 @@
       startTransition(() => {
         //not-urgent state update
       })
-
+  QUE: Virtualization for rendering Large List? // Readt about it.
+  QUE: What is npx?
+      Ans:
+        1) it is a tool of npm,
+        2) using this we can run a command of package which nested inside current directory, without moving to exact location.
+        3) we can run a command of package which is not installed in our local.
+          a) it will install the package from npm registry, then runs it finally it will uninstall the package as well.
+  QUE: package.json vs package-lock.json.
+      Ans:
+        1) package.json holds the info. regarding our project, what ever the package we install it will register in package.json under either (dependencies || devDependencies || peerDependencies).
+        2) the installed packages will be downloaded inside node_module.
+        3) the installed package may require additional or other package that too will be downloaded. but those can found inside /node_modules/<PACKAGE_NAME>/package.json.
+        4) there might be possibility that downloaded package version and specified package version mismatch bcoz of (^ || ~) symbol specified in the package.json file.
+        5) package-lock.json is introduced from npm (version > 5.0), bcoz of developer who didn't follow semantic versioning.
+        6) package-lock,json file used by many CD tools bcoz of it authencity.
+        7) package-lock.json file holds the entier details of package unlike package.json, it will register dependencies of installed pacakage inside requires key in an array format, besides it will have the exact version of the downloaded package irrespective of (^ || ~) symbol in package.json.
+  QUE: Semantic Versioning in npm.
+      Ans:
+        1) Each package in npm has version sytem like X.Y.Z,
+          a) X => Major version, Y => Minor version, Z => Path.
+        2) ^ in package.json represents npm can download latest minor version available in registry irrespective of specified version in package.json file.
+        3) ~ in package.json represents npm can download latest patch version available in registry irrespective of specified version in package.json file.
+        4) <NO_SYMBOL> in package version inside package.json will install exact version.
+  QUE: dependencies vs devDependencies vs peerDependencies
+      Ans:
+        1) dependencies => packages require to function the project,
+        2) devDependencies => packages require only in development mode (eg: webpack), while taking build or in production env packages specified inside devDependencies will be ignored as it is required only on development.
+        3) peerDependencies => these are the packages that is mandatory to function the package or project (eg: react for react-dom :: without react theres no need for react-dom).
+  QUE: How to solve nested dependency error while installing package?
+      Ans: 
+        1) By use of "--legacy-peer-deps", it will apply the installed leacy version of package instead require older version of package.
+        2) By use of "--force", it will forcely istall the same older version inside project.
+  QUE: Implement LRU(Leat Recently Used)
+      Ans: check below 👇
+  QUE: What is step functions?
+      Ans: Step Functions sends requests to other services, waits for the task to complete, and then continues to the next step in the workflow.
+  QUE: is JS Sync or Async?
+      Ans: JS is Sync langugae, but it mimics the async behaviour by making use of Event Loop
   */
 
 CONVERT_ARRAY_TO_OBJECT = () => {
@@ -297,7 +334,7 @@ CACHING_OR_MEMOIZING = () => {
   }
 
   const clumsyProduct = (num1, num2) => {
-    for (let i = 0; i < 10000000; i++) { }
+    for (let i = 0; i < 10000000; i++) {}
     return num1 * num2;
   };
 
@@ -511,57 +548,6 @@ PIPE_POLLYFILL = () => {
 
 // PIPE_POLLYFILL();
 
-BIND_POLLYFILL = () => {
-  let obj = {
-    name: "Kavin",
-  };
-  Object.prototype.myBind = function (context = this, ...arg1) {
-    const fn = this;
-    return function (...arg2) {
-      return fn.apply(context, [...arg1, ...arg2]);
-    };
-  };
-  function printMe() {
-    console.log(`My name is ${this.name}`);
-  }
-  let bindedObj = printMe.myBind(obj, "arg1");
-  bindedObj("arg2");
-};
-
-// BIND_POLLYFILL();
-
-PROMISE_ALL_POLLYFILL = () => {
-  function showText(text, time) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(text);
-      }, time);
-    });
-  }
-
-  function promiseAllPollyfil(promises) {
-    let results = [];
-    return new Promise((resolve, reject) => {
-      promises.forEach((promise, index) => {
-        promise
-          .then((res) => {
-            results.push(res);
-            if (index == promise.length - 1) {
-              resolve(results);
-            }
-          })
-          .catch((err) => reject(err));
-      });
-    });
-  }
-
-  promiseAllPollyfil([showText("Hello", 2000), Promise.resolve("Hi")])
-    .then((results) => console.log(results))
-    .catch((err) => console.log(err));
-};
-
-// PROMISE_ALL_POLLYFILL();
-
 WAYS_TO_CENTER_A_DIV = () => {
   /* 
     1. transform: translate(-50%, -50%),
@@ -662,39 +648,6 @@ ROTATE_MATRIX_BY_90_DEG = () => {
 
 // ROTATE_MATRIX_BY_90_DEG();
 
-PARANTHESIS_CHECK = (str) => {
-  let stackQue = str;
-  let stackArr = [];
-  let stackTop = -1;
-  let isNotValid = false;
-  let strArr = stackQue.split("");
-  strArr.map((str, idx) => {
-    // console.log("index: ", idx);
-    if (str == "(" || str == "[" || str == "{") {
-      // console.log("pushed : ", str, stackArr, idx);
-      stackArr.push(str);
-      stackTop++;
-    } else {
-      if (str == ")" && stackArr[stackTop] == "(") {
-        // console.log("popped : ", str, stackArr, idx);
-        stackArr.pop();
-        stackTop--;
-      } else if (str == "]" && stackArr[stackTop] == "[") {
-        // console.log("popped : ", str, stackArr, idx);
-        stackArr.pop();
-        stackTop--;
-      } else if (str == "}" && stackArr[stackTop] == "{") {
-        // console.log("popped : ", str, stackArr, idx);
-        stackArr.pop();
-        stackTop--;
-      } else {
-        isNotValid = true;
-      }
-    }
-  });
-  console.log(`Valid: ${!isNotValid}`);
-};
-
 PARANTHESIS_CHECK_NEW = (str) => {
   let closeMap = {
     "(": ")",
@@ -787,25 +740,6 @@ CHECK_SUM_PAIR_IN_ARR = (arr, sum) => {
 
 // console.log(CHECK_SUM_PAIR_IN_ARR([2, 1, 3, 6], 3)); // true
 // console.log(CHECK_SUM_PAIR_IN_ARR([2, 1, 3, 6], 6)); // false
-
-POLLYFILL_FOR_FILTER = () => {
-  // we need to create function declaration(normal function) not function declaration(arrow function),
-  // bcoz we wont get value of array that bind, since arrow function binds to window obj
-  Array.prototype.myFilter = function (cb) {
-    // console.log(this);
-    let arr = [];
-    for (let i = 0; i < this.length; i++) {
-      if (cb(this[i])) {
-        arr.push(this[i]);
-      }
-    }
-    return arr;
-  };
-
-  [1, 2, 3, 4, 5, 6].myFilter((el) => el > 3).map((el) => console.log(el));
-};
-
-// POLLYFILL_FOR_FILTER();
 
 ANAGRAM = (str1, str2) => {
   //Anagram is a word or phrase made by transposing the letters of another word or phrase
@@ -1006,9 +940,9 @@ FIND_DISTANCE_IN_STRING = () => {
     } else {
       console.log(
         char +
-        " is " +
-        (this.length - index) +
-        " characters from the end of the string!"
+          " is " +
+          (this.length - index) +
+          " characters from the end of the string!"
       );
     }
   };
@@ -1636,29 +1570,29 @@ SmallestSubArrWithGreaterSum = (arr = [], x) => {
   /* Given an array of integers and a number x, find the smallest subarray with sum greater than the given value.  */
   // Initialize current sum and minimum length
   let n = arr.length;
-  let curr_sum = 0, min_len = n + 1;
+  let curr_sum = 0,
+    min_len = n + 1;
 
   // Initialize starting and ending indexes
-  let start = 0, end = 0;
+  let start = 0,
+    end = 0;
   while (end < n) {
     // Keep adding array elements while current sum
     // is smaller than or equal to x
-    while (curr_sum <= x && end < n)
-      curr_sum += arr[end++];
+    while (curr_sum <= x && end < n) curr_sum += arr[end++];
 
     // If current sum becomes greater than x.
     while (curr_sum > x && start < n) {
       // Update minimum length if needed
-      if (end - start < min_len)
-        min_len = end - start;
+      if (end - start < min_len) min_len = end - start;
 
       // remove starting elements
       curr_sum -= arr[start++];
     }
   }
-  console.log({ arr, n, res: min_len })
+  console.log({ arr, n, res: min_len });
   return min_len;
-}
+};
 
 // SmallestSubArrWithGreaterSum([1, 4, 45, 6, 10, 19], 51);
 // SmallestSubArrWithGreaterSum([1, 10, 5, 2, 7], 9);
@@ -1688,16 +1622,64 @@ SmallestPositiveMissingNumber = (arr = []) => {
 
   for (let i = 1; i <= n; i++) {
     if (!present[i]) {
-      console.log({arr, res: i});
+      console.log({ arr, res: i });
       return i;
     }
   }
   // If the original array was of the
   // type {1, 2, 3} in its sorted form
-  console.log({arr, res: n+1});
+  console.log({ arr, res: n + 1 });
   return n + 1;
+};
+
+// SmallestPositiveMissingNumber([0, 10, 2, -10, -20]);
+// SmallestPositiveMissingNumber([2, 3, 7, 6, 8, -1, -10, 15]);
+// SmallestPositiveMissingNumber([2, 3, -7, 6, 8, 1, -10, 15]);
+
+class LRU {
+  /**
+   * LRU means items which is used lest should be first, which is most should be last
+   * items 1, 2, 3, where max is 3;
+   * 1 is accessed => 2, 3, 1,
+   * 4 is set => 3, 1, 4,
+   * 4 is accessed => 4, 3, 1.
+   */
+  constructor(max = 5) {
+    this.max = max;
+    this.cache = new Map();
+  }
+
+  set(key, value) {
+    if (this.cache.has(key)) {
+      this.cache.delete(key);
+    } else if (this.cache.size == this.max) {
+      this.cache.delete(this.first());
+    }
+    this.cache.set(key, value);
+  }
+
+  get(key) {
+    let item = this.cache.get(key);
+    if (item) {
+      this.cache.delete(key);
+      this.cache.set(key, item);
+    }
+    return item;
+  }
+
+  first() {
+    console.log("keys", this.cache.keys());
+    console.log("keys - next", this.cache.keys().next());
+    return this.cache.keys().next().value;
+  }
 }
 
-SmallestPositiveMissingNumber([0, 10, 2, -10, -20]);
-SmallestPositiveMissingNumber([2, 3, 7, 6, 8, -1, -10, 15]);
-SmallestPositiveMissingNumber([2, 3, -7, 6, 8, 1, -10, 15]);
+const lruCache = new LRU(3);
+lruCache.set("name", "kavin");
+lruCache.set("age", "23");
+lruCache.set("profession", "SWE");
+console.log(lruCache.cache);
+lruCache.set("location", "BLGR");
+console.log(lruCache.cache);
+console.log(lruCache.get("age"));
+console.log(lruCache.cache);
