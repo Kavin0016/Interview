@@ -202,6 +202,29 @@ var deepFlat = (arr, depth = 1) =>
       )
     : arr.slice();
 
+const deepObj = {
+  a: {
+    "a-nested": {
+      b: "B",
+      "a-nested-nested": {
+        c: "C",
+      },
+    },
+  },
+  d: "D",
+};
+
+/** Pollyfill for flattening an Object */
+const flatObj = (obj = {}, key = "") => {
+  return Object.keys(obj).reduce((acc, childKey) => {
+    let reducedKey = key ? `${key}.` : "";
+    if (typeof obj[childKey] === "object")
+      Object.assign(acc, flatObj(obj[childKey], reducedKey + childKey));
+    else acc[reducedKey + childKey] = obj[childKey];
+    return acc;
+  }, {});
+};
+
 console.log(printName.myCall(modObj, 22));
 console.log(printName.myCall(modObj2, 24));
 
@@ -260,3 +283,5 @@ let sumOfArr = arr.myReduce((acc, curVal, curIdx, arr) => acc + curVal);
 //   `Deep flatten an array ${JSON.stringify(nestedArr)} => `,
 //   deepFlat(nestedArr, 2)
 // );
+
+console.log(`Flattening an Object`, deepObj,'\n', flatObj(deepObj));
