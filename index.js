@@ -11,7 +11,17 @@
     we can delay the hydration(events) for the less imporatnt parts of the page. 
   * (Delaying the page Interaction)
 
-  Oauth 2.0
+  Oauth 2.0:
+  Example of Google Oauth:
+  1. 3rd patrty application ask for the GooglePhotos to access data,
+  2. 3rd part app triggers API call with Google Authorization server then,
+  3. Google Authrization Server return with Google Authentication Page where user gets logged in then,
+  4. Once the successfull login Authentication Page return the acknowledge back to Authorization sever,
+  5. The Authroization server then returns the Authorization code to 3rd paty app then,
+  6. 3rd party app hits the token API in Authorization server, where it return the Access token to 3rd party app,
+  7. Then the 3rd party app passes this access token to Google Photos seeking for data,
+  8. Again Google photos validates the Access token with Google Authorization server, once the acknowledgement is confirmed with the Authorization server,
+  9. Actual dats ia returned to the 3rd party application.
 
   CSS: POSITIONS
   CSS: BORDER-BOX, CONTENT-BOX
@@ -107,6 +117,8 @@
         5) package-lock.json is introduced from npm (version > 5.0), bcoz of developer who didn't follow semantic versioning.
         6) package-lock,json file used by many CD tools bcoz of it authencity.
         7) package-lock.json file holds the entier details of package unlike package.json, it will register dependencies of installed pacakage inside requires key in an array format, besides it will have the exact version of the downloaded package irrespective of (^ || ~) symbol in package.json.
+  QUE: How can you ensure that you can able to use imports rather than require:
+    Ans: in package.json define proprty "type" with value "module",      
   QUE: Semantic Versioning in npm.
       Ans:
         1) Each package in npm has version sytem like X.Y.Z,
@@ -1013,14 +1025,11 @@ FUNCTION_SCOPE = () => {
   var fun = function () {
     /* Here the var x will be showed from global scope since its showed, local scope has priority over global,
     so it will print "undefined" since the local variable has not yet initialized */
-    console.log("inner fun before initialization", x);
+    console.log("inner fun before initialization", x); // undefined;
     var x = 20;
-    console.log("inner fun after initialization", x);
+    console.log("inner fun after initialization", x); // 20
   };
-  /* since after inner fun execution we are prinitng the var x it will print "20" 
-  becoz, in inner fun the var x in global scope has been update through 
-  shadowing by changing the value for global var x through refrence */
-  console.log("outter fun after inner fun execution", x);
+  console.log("outter fun after inner fun execution", x); // 10
   fun();
 };
 
