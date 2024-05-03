@@ -148,5 +148,8 @@ follow RADIO structure
 ### Security
 
 - XSS
+    - To protect XSS attack use `X-XSS-Protection` header along with `content_security_policy` header
 - rate Limiting
+    - use Debouncing and Throttling to limit the triggers.
 - CORS
+    - To protect CORS, since its on server end, migrate all the resources to same domain or build node or express server in the middle to server all the resources or use `Access-Control-Allow-Origin` to defined permitted urls.
