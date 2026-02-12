@@ -5,6 +5,24 @@ Architecture is not about file directory structure, it's all layers and how they
 ## MVC (Model-View-Controller)
 
 ```
+         +---------+         updates/retrieves       +--------+
+         |         |<------------------------------->|        |
+         |  Model  |                                 |  View  |
+         |         |-------------------------------->|        |
+         +---------+         notifies/updates        +--------+
+             ^                                        ^
+             |   user input/action                    |
+             |                                        |
+             |                                        |
+         +-----------+  updates/manipulates/model   +-----------+
+         |           |----------------------------->|           |
+         | Controller|                              |           |
+         |           |<-----------------------------|           |
+         +-----------+          triggers update     +-----------+
+
+
+```
+```
 project-root/
 │
 ├── models/
@@ -104,6 +122,66 @@ In Morden Complex Applications, a controller is taking role of client-side cachi
 - client side logic sensitive applications,
 - Offline / local first applications
 
+## MVP (Model-View-Presenter)
+
+```
+       +-------+          +-----------+           +-------+
+       |       | actions  |           | updates   |       |
+       | View  |<-------->| Presenter |<--------->| Model |
+       |       |          |           |           |       |
+       +-------+          +-----------+           +-------+
+                           
+         ^   |                                  (No direct
+         |   |                                   connection
+         |   |                                   between
+         |   v                                   View & Model)
+       User Interactions
+
+```
+
+**Legend:**
+- **View:** Displays UI, forwards user actions/events to Presenter.
+- **Presenter:** Handles presentation logic, updates View, communicates with Model.
+- **Model:** Handles data, business logic, notifies Presenter upon changes.
+
+
+**View** <-> **Presenter** <-> **Model (No Connection between Model and View)**
+
+It solves the major problem of MVC, where View holds lots of logic, then View won't get the update directly from Modal, it stays in sync with Presenter
+
+**Two Types:**
+- **Supervisor View:** 
+    - Stil gets some updates from Model (Minimal) hence still some logic present at View
+    - *Pros:*
+        - Less Boiler plate code,
+        - Faster Development
+    - *Cons:*
+        - Harder to test and maintain since logic is present in the UI
+    - *Use cases:*
+        - simpler UI where View Logic is minimal
+- **Passive View:**
+    - Completely passive in getting updated from Model and completely relies on Presenter Layer
+        - *Pros:*
+            - Strong boundries between View, Model & presenter
+            - View stays passive less code in UI
+        - *Cons:*
+            - Requires more code to handle the basic UI,
+            - Overhead for Simple View Model Interation
+        - *Use cases:*
+            - Comlex UI, testability, logic-heavy applications and long-term scalability is concerned.
+
+### Pros & Cons:
+
+#### Pros:
+- Clear Layer of Separation,
+- Testability
+
+#### Cons:
+- Fat Presenter to handle multiple logics and caching part,
+- Inexpressiveness: MVP doesn't provide the clear pattern for data synchorization, caching, etc.
+
+### Use cases:
+- Same as *MVC*, but *MVP* provide better separation of layer, and provides better testability code for complex UI and logic heavy View.
 
 ## Important of Architecture
 
