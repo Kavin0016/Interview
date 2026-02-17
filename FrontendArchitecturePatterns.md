@@ -89,7 +89,7 @@ eg:
 - Multi Page Applications (MPA),
 - Static Websites
 
-### Thick Client
+#### Thick Client
 - Single Page Application (SPA),
 - Offline-first Applicatoins (PWA),
 - Google Docs
@@ -182,6 +182,45 @@ It solves the major problem of MVC, where View holds lots of logic, then View wo
 
 ### Use cases:
 - Same as *MVC*, but *MVP* provide better separation of layer, and provides better testability code for complex UI and logic heavy View.
+
+## MVVM (Model-View-View-Model)
+
+It separates the Business Logic nad View Logic (State Management). It allows two-way data binding between View and View Model layer.
+- It is designed to store User Interface data, The problem with MVC/MVP is that they don't distinguish between busineess and UI data,
+- The *View* is isolated from *Model*. The *View Model* coordinates with *Model* and provides data to the *View*,
+- Many *Views* can have a single *View Model* but a single *View* cannot have more than one *View Model*
+- *View Model* contains all the data and behaviour of the user interface but without any of the control used to display the user interface on the screen
+```
++------------+  Two-way Data Binding  +----------------+   Updates/View Events +-----------+
+|            |<---------------------->|                | <-------------------->|           |
+|   View     |                        |   ViewModel    |                       |  Model    |
+| (UI Layer) |    User Actions        | (State, Logic) |  Data/Commands        | (Data,    |
+|            |----------------------> |                |---------------------->|  Business |
+|            |                        |                |                       |  Logic)   |
++------------+                        +----------------+                       +-----------+
+```
+
+**Legend:**
+- **View:** Displays the UI and relays user actions to the ViewModel.
+- **ViewModel:** Handles UI logic and state, communicates with the Model, exposes data and commands to the View.
+- **Model:** Contains the core business logic and data.
+
+**Key Points:**
+- View and ViewModel communicate via two-way data binding.
+- ViewModel updates or retrieves data from the Model.
+- Model notifies the ViewModel of data changes, which updates the View accordingly.
+
+### Pros & Cons
+#### Pros
+- Clear Layer Separation,
+- Easier to Test, Scale & Maintain.
+#### Cons
+- Stepper Learning Curve, Harder to understand and implement,
+-  It help us to store presentation logic but doesn't help us to organise other parts of application like API request, etc.
+
+### Use Case:
+- It is useful when there is complex UI Logic that needs through testing.
+- Doesn't helpfull in simple static websites.
 
 ## Important of Architecture
 
